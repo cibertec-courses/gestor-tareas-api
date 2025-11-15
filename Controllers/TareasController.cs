@@ -16,7 +16,7 @@ namespace gestor_tareas_api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Tarea>> ObtenerTodas([FromQuery] string? prioridad, [FromQuery] bool? completada)
+        public ActionResult<List<Tarea>> ObtenerTodas([FromQuery] string? prioridad, [FromQuery] bool? completada) /// /api/tareas?prioridad="Alta"
         {
             if(!string.IsNullOrEmpty(prioridad))
             {
@@ -76,6 +76,7 @@ namespace gestor_tareas_api.Controllers
         }
 
         // DELETE
+        [HttpDelete("{id}")]
         public ActionResult Eliminar(int id)
         {
             var eliminado = _repository.Eliminar(id);
