@@ -14,7 +14,7 @@ namespace gestor_tareas_api.Data
         private static int _siguienteId =4;
 
         // Logica Repository
-        public List<Tarea> Tareas()
+        public List<Tarea> ObtenerTodas()
         {
             return _tareas;
         }
