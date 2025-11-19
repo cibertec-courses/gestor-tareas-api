@@ -1,9 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using gestor_tareas_api.Data;
+using DotNetEnv;
+
+Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 
@@ -17,6 +20,21 @@ builder.Services.AddCors(options =>
     });
 }
 );
+
+// LEER VARIABELES DE ENTORNO
+
+var server = Environment.GetEnvironmentVariable("MYSQL_SERVER");
+var port = Environment.GetEnvironmentVariable("MYSQL_PORT");
+var database =  Environment.GetEnvironmentVariable("MYSQL_DATABASE");
+var user =  Environment.GetEnvironmentVariable("MYSQL_USER");
+var password = Environment.GetEnvironmentVariable("MYSQL_PASSWORD");
+
+var connectionString = $"Server={server};Port={port};Database={database};User={user};Password={password}";
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+   options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 
 
 builder.Services.AddSwaggerGen(c =>
