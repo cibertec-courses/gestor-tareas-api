@@ -10,9 +10,9 @@ namespace gestor_tareas_api.Controllers
     {
         private readonly TareaRepository _repository;
 
-        public TareasController()
+        public TareasController(TareaRepository repository)
         {
-            _repository = new TareaRepository();
+            _repository = repository;
         }
 
         [HttpGet]
